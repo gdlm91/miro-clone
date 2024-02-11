@@ -12,7 +12,6 @@ const SearchInput = () => {
   const [value, setValue] = useState("");
   const debouncedValue = useDebounce(value, 500);
   const searchParams = useSearchParams();
-  const existingSearchParams = Object.fromEntries(searchParams.entries());
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -23,7 +22,6 @@ const SearchInput = () => {
       {
         url: "/",
         query: {
-          ...existingSearchParams,
           search: debouncedValue,
         },
       },
@@ -34,7 +32,7 @@ const SearchInput = () => {
     );
 
     router.push(url);
-  }, [debouncedValue, router, existingSearchParams]);
+  }, [debouncedValue, router]);
 
   return (
     <div className="w-full relative">
